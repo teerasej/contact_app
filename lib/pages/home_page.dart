@@ -37,8 +37,21 @@ class _HomePageState extends State<HomePage> {
         title: Text('Home'),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, RouteMap.contactNew);
+            onPressed: () async {
+              Navigator.pushNamed(context, RouteMap.contactNew).then(
+                (value) {
+                  ContactModel newContact = value as ContactModel;
+                  setState(() {
+                    _contacts.add(newContact);
+                  });
+                },
+              );
+              // var newContact = await Navigator.pushNamed<ContactModel>(
+              //     context, RouteMap.contactNew);
+
+              // setState(() {
+              //   _contacts.add(newContact!);
+              // });
             },
             icon: Icon(Icons.add),
           ),

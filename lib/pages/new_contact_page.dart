@@ -86,6 +86,8 @@ class NewContactPage extends StatelessWidget {
                       _formKey.currentState!.save();
                       print(
                           '${_newContact.firstName} ${_newContact.lastName} ${_newContact.phone}');
+
+                      Navigator.pop(context, _newContact);
                     }
                   },
                   child: Text('Save'),

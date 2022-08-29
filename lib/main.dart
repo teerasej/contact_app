@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: HomePage(),
       debugShowCheckedModeBanner: false,
-      initialRoute: RouteMap.contactNew,
+      initialRoute: RouteMap.home,
       routes: {
         RouteMap.home: (context) {
           return HomePage();
