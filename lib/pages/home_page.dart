@@ -15,20 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> _usernames = ['john', 'mary'];
-
-  List<ContactModel> _contacts = [
-    ContactModel(
-      firstName: 'John',
-      lastName: 'Travota',
-      phone: '0821115555',
-    ),
-    ContactModel(
-      firstName: 'Peter',
-      lastName: 'Parker',
-      phone: '0830713373',
-    ),
-  ];
+  List<ContactModel> _contacts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -38,29 +25,39 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, RouteMap.contactNew);
+              Navigator.pushNamed(context, RouteMap.contactNew).then(
+                (value) {
+                  // ContactModel newContact = value as ContactModel;
+                  var newContact = value as ContactModel;
+
+                  setState(() {
+                    _contacts.add(newContact);
+                    print('contacts in list: ${_contacts.length}');
+                  });
+                },
+              );
             },
             icon: Icon(Icons.add),
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: _contacts.length,
-        itemBuilder: (BuildContext context, int index) {
-          var contact = _contacts[index];
-          return ListTile(
-            title: Text('${contact.firstName} ${contact.lastName}'),
-            subtitle: Text('${contact.phone}'),
-            // onTap: () {},
-            leading: InkWell(
-              child: Icon(Icons.person),
-              onTap: () {
-                print('tap');
-              },
-            ),
-          );
-        },
-      ),
+      // body: ListView.builder(
+      //   itemCount: _contacts.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //     var contact = _contacts[index];
+      //     return ListTile(
+      //       title: Text('${contact.firstName} ${contact.lastName}'),
+      //       subtitle: Text('${contact.phone}'),
+      //       // onTap: () {},
+      //       leading: InkWell(
+      //         child: Icon(Icons.person),
+      //         onTap: () {
+      //           print('tap');
+      //         },
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 }
