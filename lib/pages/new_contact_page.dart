@@ -1,5 +1,7 @@
 import 'package:contact_app/models/contact_model.dart';
+import 'package:contact_app/providers/contact_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NewContactPage extends StatelessWidget {
   NewContactPage({Key? key}) : super(key: key);
@@ -87,7 +89,10 @@ class NewContactPage extends StatelessWidget {
                       print(
                           '${_newContact.firstName} ${_newContact.lastName} ${_newContact.phone}');
 
-                      Navigator.pop(context, _newContact);
+                      var provider = context.read<ContactProvider>();
+                      provider.saveNewContact(_newContact);
+
+                      Navigator.pop(context);
                     }
                   },
                   child: Text('Save'),

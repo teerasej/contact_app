@@ -1,10 +1,29 @@
 import 'package:contact_app/pages/home_page.dart';
 import 'package:contact_app/pages/new_contact_page.dart';
+import 'package:contact_app/providers/contact_provider.dart';
+import 'package:contact_app/providers/user_provider.dart';
 import 'package:contact_app/route_map.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return UserProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return ContactProvider();
+          },
+        )
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
